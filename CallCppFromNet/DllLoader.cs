@@ -1,29 +1,11 @@
 ﻿using System.Runtime.InteropServices;
 using System;
+using System.IO;
 
 namespace CallCppFromNet
 {
     abstract class DllLoader : IDisposable 
     {
-        //[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        //private static extern IntPtr LoadLibrary(string libname);
-
-        //[DllImport("kernel32.dll", CharSet = CharSet.Auto)]
-        //private static extern bool FreeLibrary(IntPtr hModule);
-
-        //[DllImport("kernel32.dll", CharSet = CharSet.Auto)]
-
-
-        // private static extern IntPtr GetProcAddress(IntPtr hModule, string lpProcName);
-
-        //[DllImport("kernel32.dll")]
-        //protected static extern IntPtr LoadLibrary(string dllToLoad);
-
-        //[DllImport("kernel32.dll")]
-        //protected static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
-
-        //[DllImport("kernel32.dll")]
-        //protected  static extern bool FreeLibrary(IntPtr hModule);
 
         /// <summary>
         ///  указатель на загруженную Dll
@@ -44,16 +26,43 @@ namespace CallCppFromNet
         protected T GetDelegate<T>(string functionName)where T : Delegate 
     {
         IntPtr funcaddr = NativeMethods.GetProcAddress(Handle, functionName);
-       // return Marshal.GetDelegateForFunctionPointer<T>(funcaddr);
-        // или для старых версий .NET
-         return (T)Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(T));
-    }
+       
+             return Marshal.GetDelegateForFunctionPointer<T>(funcaddr);
 
-    public void Dispose()
+        // или для старых версий .NET
+        // return (T)Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(T));
+    }
+        // Detect redundant Dispose() calls.
+        private bool _isDisposed;
+
+
+        // Public implementation of Dispose pattern callable by consumers.
+        public void Dispose()
         {
-            if (Handle != IntPtr.Zero)
-                NativeMethods.FreeLibrary(Handle);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        // Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                _isDisposed = true;
+
+                if (disposing)
+                {
+                    // Dispose managed state.
+                    if (Handle != IntPtr.Zero)
+                    {
+                        NativeMethods.FreeLibrary(Handle);
+                        Handle = IntPtr.Zero;
+                    }
+                }
+            }
+        }
+
+        
     }
 
 
