@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CppSourceCodeProject\CppSourceCodeProject.vcxproj">
+      <Project>{23eebb2a-da24-4b51-a7e2-301f0f2502ce}</Project>
+      <Name>CppSourceCodeProject</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
