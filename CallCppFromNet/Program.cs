@@ -38,6 +38,11 @@ namespace CallCppFromNet
             var SumIntsDelegateObj = (SumIntsDelegate)Marshal.GetDelegateForFunctionPointer(
                                                                                     pAddressOfFunctionToCall,
                                                                                     typeof(SumIntsDelegate));
+            using (SumIntsCallWrapper cppDll=new SumIntsCallWrapper(CppLib))
+            {
+                Console.WriteLine($@"Call cpp code from {CppLib} {nameof(SumInts)} ({String.Join(separator, a)}) = {cppDll.SumInts(a)}");
+            }
+
             Console.WriteLine($@"Call cpp code from {CppLib} {nameof(SumInts)} ({String.Join(separator, a)}) = {SumInts(a)}");         
         }
     }
