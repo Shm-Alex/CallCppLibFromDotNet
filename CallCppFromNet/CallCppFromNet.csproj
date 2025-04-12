@@ -14,7 +14,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -53,6 +53,10 @@
     <ProjectReference Include="..\CppSourceCodeProject\CppSourceCodeProject.vcxproj">
       <Project>{23eebb2a-da24-4b51-a7e2-301f0f2502ce}</Project>
       <Name>CppSourceCodeProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetStandardCppWrapper\DotNetStandardCppWrapper.csproj">
+      <Project>{955e743d-ba6d-4f2c-ba21-f9eded604912}</Project>
+      <Name>DotNetStandardCppWrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCppFromNet", "CallCppFromNet.csproj", "{0EC72372-6EDF-4157-949E-540CDC62D03F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCppFromNet", ".\CallCppFromNet\CallCppFromNet.csproj", "{0EC72372-6EDF-4157-949E-540CDC62D03F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppSourceCodeProject", "..\CppSourceCodeProject\CppSourceCodeProject.vcxproj", "{23EEBB2A-DA24-4B51-A7E2-301F0F2502CE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppSourceCodeProject", ".\CppSourceCodeProject\CppSourceCodeProject.vcxproj", "{23EEBB2A-DA24-4B51-A7E2-301F0F2502CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetStandardCppWrapper", "..\DotNetStandardCppWrapper\DotNetStandardCppWrapper.csproj", "{955E743D-BA6D-4F2C-BA21-F9EDED604912}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetStandardCppWrapper", ".\DotNetStandardCppWrapper\DotNetStandardCppWrapper.csproj", "{955E743D-BA6D-4F2C-BA21-F9EDED604912}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformConsole", "..\CrossPlatformConsole\CrossPlatformConsole.csproj", "{C9A0291E-F99E-4343-911C-070F45F216D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformConsole", ".\CrossPlatformConsole\CrossPlatformConsole.csproj", "{C9A0291E-F99E-4343-911C-070F45F216D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
