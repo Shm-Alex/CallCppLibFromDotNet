@@ -1,16 +1,15 @@
-﻿using System.Runtime.InteropServices;
-using System;
-using System.IO;
+﻿using System;
+using System.Runtime.InteropServices;
 
-namespace CallCppFromNet
+namespace DotNetStandardCppWrapper
 {
-    abstract class DllLoader : IDisposable 
+   public abstract class DllLoader : IDisposable
     {
 
         /// <summary>
         ///  указатель на загруженную Dll
         /// </summary>
-        protected  IntPtr Handle { get; private set; }
+        protected IntPtr Handle { get; private set; }
 
         public DllLoader(string filename)
         {
@@ -23,15 +22,15 @@ namespace CallCppFromNet
             }
         }
 
-        protected T GetDelegate<T>(string functionName)where T : Delegate 
-    {
-        IntPtr funcaddr = NativeMethods.GetProcAddress(Handle, functionName);
-       
-             return Marshal.GetDelegateForFunctionPointer<T>(funcaddr);
+        protected T GetDelegate<T>(string functionName) where T : Delegate
+        {
+            IntPtr funcaddr = NativeMethods.GetProcAddress(Handle, functionName);
 
-        // или для старых версий .NET
-        // return (T)Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(T));
-    }
+            return Marshal.GetDelegateForFunctionPointer<T>(funcaddr);
+
+            // или для старых версий .NET
+            // return (T)Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(T));
+        }
         // Detect redundant Dispose() calls.
         private bool _isDisposed;
 
@@ -62,8 +61,6 @@ namespace CallCppFromNet
             }
         }
 
-        
+
     }
-
-
 }

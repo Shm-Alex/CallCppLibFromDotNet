@@ -1,10 +1,8 @@
-﻿using CallCppFromNet;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace CallCppFromNet
+namespace DotNetStandardCppWrapper
 {
-
-    class SumIntsCallWrapper : DllLoader
+   public  class SumIntsCallWrapper : DllLoader
     {
         public SumIntsCallWrapper(string filename) : base(filename)
         {
@@ -14,10 +12,8 @@ namespace CallCppFromNet
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate int SumIntsDelegate(int[] numberToSum);
-        
+
         SumIntsDelegate SumIntsDelegate_;
-        
+
     }
-
-
 }
