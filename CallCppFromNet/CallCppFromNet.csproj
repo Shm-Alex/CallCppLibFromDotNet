@@ -58,6 +58,10 @@
       <Project>{955e743d-ba6d-4f2c-ba21-f9eded604912}</Project>
       <Name>DotNetStandardCppWrapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MathLibContract\MathLibContract.csproj">
+      <Project>{56873A2F-55B0-4C1C-997E-D816556EA977}</Project>
+      <Name>MathLibContract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

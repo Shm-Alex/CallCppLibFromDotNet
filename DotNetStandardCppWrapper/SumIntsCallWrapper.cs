@@ -1,8 +1,8 @@
 ﻿using System.Runtime.InteropServices;
-
+using MathLibContract;
 namespace DotNetStandardCppWrapper
 {
-   public  class SumIntsCallWrapper : DllLoader
+   public  class SumIntsCallWrapper : DllLoader, IMathLibService
     {
         public SumIntsCallWrapper(string filename) : base(filename)
         {

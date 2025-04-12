@@ -1,4 +1,7 @@
 
+using DotNetStandardCppWrapper;
+using MathLibContract;
+
 namespace WebApiProxy2Cpp
 {
     public class Program
@@ -8,8 +11,9 @@ namespace WebApiProxy2Cpp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddSingleton<IMathLibService>(new SumIntsCallWrapper("CppSourceCodeProject.dll"));
 
-            builder.Services.AddControllers();
+                builder.Services.AddControllers();
             //  register Nswag services
             builder.Services.AddOpenApiDocument();
 
