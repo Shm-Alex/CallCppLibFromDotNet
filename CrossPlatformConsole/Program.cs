@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using DotNetStandardCppWrapper;
+using MathLibContract;
 namespace CrossPlatformConsole
 {
     internal class Program
@@ -14,22 +15,30 @@ namespace CrossPlatformConsole
             private delegate int SumIntsDelegate(int[] numberToSum);
             static void Main(string[] args)
             {
-                int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 0 };
+            #region Call SumInts from CppLib using DllImport
+            int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 0 };
 
-                string separator = " + ";
-                Console.WriteLine($@"Call cpp code from {CppLib} {nameof(SumInts)} ({String.Join(separator, a)}) = {SumInts(a)}");
-                IntPtr pDll = NativeMethods.LoadLibrary(CppLib);
-                IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, $"{nameof(SumInts)}");
-                var SumIntsDelegateObj = (SumIntsDelegate)Marshal.GetDelegateForFunctionPointer(
-                                                                                        pAddressOfFunctionToCall,
-                                                                                        typeof(SumIntsDelegate));
-                using (SumIntsCallWrapper cppDll = new SumIntsCallWrapper(CppLib))
-                {
-                    Console.WriteLine($@"Call cpp code from {CppLib} {nameof(SumInts)} ({String.Join(separator, a)}) = {cppDll.SumInts(a)}");
-                }
+            string separator = " + ";
+            Console.WriteLine($@"Call cpp code from {CppLib} {nameof(SumInts)} ({String.Join(separator, a)}) = {SumInts(a)}");
+            #endregion
 
-                Console.WriteLine($@"Call cpp code from {CppLib} {nameof(SumInts)} ({String.Join(separator, a)}) = {SumInts(a)}");
+            #region  manual loading dll to memory using system32 LoadLibrary and   Call SumInts from CppLib and call SumInts  binding delegete SumIntsDelegate  with  cpp code via   GetDelegateForFunctionPointer  
+            IntPtr pDll = NativeMethods.LoadLibrary(CppLib);
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, $"{nameof(SumInts)}");
+            var SumIntsDelegateObj = (SumIntsDelegate)Marshal.GetDelegateForFunctionPointer(
+                                                                                    pAddressOfFunctionToCall,
+                                                                                    typeof(SumIntsDelegate));
+            Console.WriteLine($@"Call cpp code from {CppLib} {nameof(SumInts)} ({String.Join(separator, a)}) = {SumInts(a)}");
+
+            #endregion
+            #region same as previous method, but using  IDisposable wrapper class
+
+            using (IMathLibService cppDll = new SumIntsCallWrapper(CppLib))
+            {
+                Console.WriteLine($@"Call cpp code from {CppLib} {nameof(SumInts)} ({String.Join(separator, a)}) = {cppDll.SumInts(a)}");
             }
+            #endregion
+        }
     }
     
 }

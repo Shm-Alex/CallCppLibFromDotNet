@@ -2,6 +2,6 @@
 class SimpleOperation
 {
 public:
-	static int SumInts(void* p);
+	static int SumInts(int * p);
 };
 

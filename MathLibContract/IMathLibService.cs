@@ -2,7 +2,7 @@
 
 namespace MathLibContract
 {
-   public interface IMathLibService
+   public interface IMathLibService:IDisposable
     {
         int SumInts(int[] numberToSum);
     }
